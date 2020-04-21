@@ -38,6 +38,19 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            >
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/country_arrays"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="7dp">
 
             <EditText
@@ -49,7 +62,7 @@
                 android:digits="abcdefghijklmnopqrstuvwxyz . ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
-                android:hint="@string/fullName"
+                android:hint="Full Name Please"
                 android:inputType="textCapWords"
                 android:padding="10dp"
                 android:singleLine="true"
