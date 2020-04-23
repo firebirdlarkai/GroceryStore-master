@@ -43,7 +43,8 @@
                 android:id="@+id/spinner1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/country_arrays"
+                android:entries="@array/city_array"
+                android:prompt="@string/hint_resource"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
