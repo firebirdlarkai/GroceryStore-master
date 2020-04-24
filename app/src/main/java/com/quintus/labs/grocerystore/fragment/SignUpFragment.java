@@ -10,14 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.LoginRegisterActivity;
@@ -47,17 +50,51 @@ public class SignUpFragment extends Fragment implements OnClickListener {
     Gson gson = new Gson();
     View progress;
 
+    int checkCityStatus = 0;
+
     public SignUpFragment() {
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.signup_layout, container, false);
         localStorage = new LocalStorage(getContext());
         initViews();
         setListeners();
+        final Snackbar snackbar = Snackbar.make(container, "Service not available in your city", Snackbar.LENGTH_INDEFINITE);;
+        final Spinner spinner = view.findViewById(R.id.spinner1);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String text = spinner.getSelectedItem().toString();
+
+
+
+                if (text.equals("Select City Name"))
+                {
+                    checkCityStatus = 0;
+                    snackbar.dismiss();
+                }
+                else if (text.equals("My City"))
+                {
+                    checkCityStatus = 1;
+                    snackbar.dismiss();
+                }
+                else if (text.equals("Other"))
+                {
+                    checkCityStatus = 2;
+                    snackbar.show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         return view;
     }
 
@@ -73,6 +110,7 @@ public class SignUpFragment extends Fragment implements OnClickListener {
         signUpButton = view.findViewById(R.id.signUpBtn);
         login = view.findViewById(R.id.already_user);
         terms_conditions = view.findViewById(R.id.terms_conditions);
+
 
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
@@ -108,8 +146,26 @@ public class SignUpFragment extends Fragment implements OnClickListener {
 
     }
 
+    // test
+
     // Check Validation Method
     private void checkValidation() {
+
+        if (checkCityStatus==0)
+        {
+            Toast.makeText(getContext(), "Please Select a city", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if(checkCityStatus==1)
+        {
+            // Do nothing
+        }
+        else if (checkCityStatus==2)
+        {
+            return;
+        }
+
+
         // Get all edittext texts
         String getFullName = fullName.getText().toString();
 //        String getEmailId = emailId.getText().toString();

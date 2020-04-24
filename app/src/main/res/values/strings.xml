@@ -30,4 +30,10 @@
     <string name="submit">SUBMIT</string>
     <string name="back">BACK</string>
     <string name="action_Cart">Cart</string>
+
+    <string-array name="city_name">
+        <item>Select City Name</item>
+        <item>My City</item>
+        <item>Other</item>
+    </string-array>
 </resources>
